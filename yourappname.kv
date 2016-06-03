@@ -21,7 +21,18 @@ TestGame:
             gameworld: _gameworld
             zones: ['general']
             size_of_component_block: 128
-
+        Renderer: ### add a renderer
+            id: _renderer
+            gameworld: _gameworld
+            system_id: 'renderer'
+            zones: ['general']
+            frame_count: 1
+            updateable: False ## updateable is as attribute of the GameSystem class
+            force_update: True
+            size_of_batches: 128
+            size_of_component_block: 128
+            ### there's an error in the online tutorial here...it should be
+            shader_source: 'assets/glsl/positionshader.glsl'
     GameScreenManager:
         id: _gamescreenmanager
         size: root.size
@@ -29,3 +40,24 @@ TestGame:
         gameworld: _gameworld
         GameScreen:
             name:'main'
+
+<GameScreenManager>:
+    MainScreen:
+        id: _main_screen
+
+<MainScreen@GameScreen>:
+    name: 'main'
+    FloatLayout:
+        DebugPanel:
+            size_hint: (.2, .1)
+            pos_hint: {'x': .225, 'y': .025}
+
+<DebugPanel>:
+    Label:
+        pos: root.pos
+        size: root.size
+        font_size: root.size[1]*.5
+        halign: 'center'
+        valign: 'middle'
+        color: (1,1,1,1)
+        text: 'FPS: ' + root.fps if root.fps != None else 'FPS:'
