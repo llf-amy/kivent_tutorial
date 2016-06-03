@@ -3,16 +3,29 @@
 
 TestGame:
 
-<TestGame@Widget>: ## adding @Widget makes this the root widget
-    gameworld: _gameworld  ##reference to GameWorld id
+<TestGame>:
+    gameworld: _gameworld
     DebugLabel:
         text: "testgame"
     GameWorld:
         id: _gameworld
-        ##gamescreenmanager: _gamescreenmanager ## reference to GameScreenManager id
-        size_of_gameworld: 100*1024 ## required see explanation
-        size_of_entity_block: 128 ## required see explanation
-        system_count: 8 ## max number of GameSystems with components
+        gamescreenmanager: _gamescreenmanager
+        size_of_gameworld: 100*1024
+        size_of_entity_block: 128
+        system_count: 8
         zones: {'general':10000}
         DebugLabel:
             text: "gameworld"
+        PositionSystem2D:
+            system_id: 'position'
+            gameworld: _gameworld
+            zones: ['general']
+            size_of_component_block: 128
+
+    GameScreenManager:
+        id: _gamescreenmanager
+        size: root.size
+        pos: root.pos
+        gameworld: _gameworld
+        GameScreen:
+            name:'main'
