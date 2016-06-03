@@ -1,0 +1,18 @@
+#:include debug.kv
+#:kivy 1.9.0
+
+TestGame:
+
+<TestGame@Widget>: ## adding @Widget makes this the root widget
+    gameworld: _gameworld  ##reference to GameWorld id
+    DebugLabel:
+        text: "testgame"
+    GameWorld:
+        id: _gameworld
+        ##gamescreenmanager: _gamescreenmanager ## reference to GameScreenManager id
+        size_of_gameworld: 100*1024 ## required see explanation
+        size_of_entity_block: 128 ## required see explanation
+        system_count: 8 ## max number of GameSystems with components
+        zones: {'general':10000}
+        DebugLabel:
+            text: "gameworld"
